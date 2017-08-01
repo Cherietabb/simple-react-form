@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Well, Row, Col, PageHeader} from 'react-bootstrap';
+import {Col, PageHeader} from 'react-bootstrap';
 
 class Header extends Component {
 
