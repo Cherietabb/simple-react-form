@@ -23,13 +23,10 @@ class ContactForm extends Component {
   }
 
   handleSubmit(event) {
-    alert('name: ' + this.refs.name);
-    console.log('Success');
-    this.setState({
-        type: 'info',
-        message: 'Sending...'
-      });
-    event.preventDefault();
+    event.preventDefault()
+    // this.refs.onSubmit(this.refs.value)
+    console.log(this.name)
+    alert('Form successfully submitted...')
   }
 
 
@@ -43,7 +40,7 @@ class ContactForm extends Component {
 
     return (
       <Col>
-        <Form horizontal className="form-horizontal" action=" " ref= "contactForm" id="contact_form" onSubmit={this.handleSubmit}>
+        <Form horizontal className="form-horizontal" action="POST" ref= "contactForm" id="contact_form" onSubmit={this.handleSubmit}>
           <FormGroup controlId="formHorizontalFirstName">
             <Col sm={6} componentClass={ControlLabel}>
               First Name
@@ -96,7 +93,7 @@ class ContactForm extends Component {
             <Col sm={6} componentClass={ControlLabel}>
               State
             </Col>
-            <Col sm={6}>
+            <Col sm={3}>
               <FormControl componentClass='select' type="text" placeholder="State" value={this.state.state} onChange={this.handleInputChange}>
                 {states.map(state => <option value='state' key={state}>{state}</option>)}</FormControl>
             </Col>
@@ -117,7 +114,7 @@ class ContactForm extends Component {
               <FormControl componentClass='textarea' type="text" placeholder="Message" value={this.state.message} onChange={this.handleInputChange}/>
             </Col>
           </FormGroup>
-          <Button type="submit" onClick={(e) => this.handleSubmit(e)}>
+          <Button type="submit">
             Submit
           </Button>
         </Form>

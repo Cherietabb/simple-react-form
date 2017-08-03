@@ -5,7 +5,7 @@ class Header extends Component {
 
   render() {
     return (
-    <Col >
+    <Col>
       <PageHeader className='App-header'>
         Simple Contact Form<small> A Reusable form for most projects</small>
       </PageHeader>
