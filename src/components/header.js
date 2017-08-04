@@ -7,7 +7,7 @@ class Header extends Component {
     return (
     <Col>
       <PageHeader className='App-header'>
-        Simple Contact Form<small> A Reusable form for most projects</small>
+        Simple Contact Form<small> A Reusable form to add to projects.</small>
       </PageHeader>
     </Col>
     )
