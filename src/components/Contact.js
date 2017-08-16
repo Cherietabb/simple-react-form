@@ -83,13 +83,13 @@ class MuiContactForm extends Component {
 			isError = true;
 			errors.emailError = "Email is required"
 		}
-		
-		if (this.state.email != /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(this.state.email)) {
+
+		if (this.state.email !== /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(this.state.email)) {
 			isError = true
 			errors.emailError = "Please enter a valid email address"
 		}
 
-		if (this.state.phone &&  !phonePattern) {
+		if (this.state.phone && !phonePattern) {
 			isError = true;
 			errors.phoneError = "Please enter a valid phone number"
 		}
