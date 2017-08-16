@@ -2,21 +2,27 @@ import React, {Component} from 'react';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import SelectField from 'material-ui/SelectField';
+import MenuItem from 'material-ui/MenuItem';
 
 const contentStyle = {
 	display: 'flex',
-	flexWrap: 'wrap',
 	width: '80%',
 	padding: '50px',
-	margin: 'auto 400px'
-
+	justifyContent: 'center'
+	// margin: 'auto 0'
 };
 
 const textFieldStyle = {
 	display: 'flex',
-	flexDirection: 'column',
-	align: 'center'
+  flexDirection: 'column',
 };
+
+const stateNameList = [
+	'AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FL', 'GA', 'HI',
+	'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS',
+	'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR',
+	'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY'
+];
 
 class MuiContactForm extends Component {
 	constructor(props) {
@@ -32,19 +38,36 @@ class MuiContactForm extends Component {
 			phone: '',
 			phoneError: '',
 			state: '',
+
+
 		};
+		this.onStateChange = this.onStateChange.bind(this)
 	}
+
+	// _renderStates() {
+	// 	return this.state.stateNameList.map(stateName => {
+	// 		return <MenuItem key={stateName} />
+	// 	})
+	// }
+	//
+	onStateChange = (e, updatedValue) => {
+		this.setState({
+			state: updatedValue
+		}, console.log(this.state.stateName))
+		this.props.updateStateState(updatedValue)
+	};
+
 
 	handleInputChange = e => {
 		this.props.onChange({ [e.target.name]: e.target.value });
 		this.setState({
 			[e.target.name]: e.target.value
-		})
+		}, console.log(e.target.name))
 	};
 
 	validate = () => {
 		let isError = false;
-		const phonePattern = "\d{3}[-.]?\d{3}[-.]?\d{4}\b";
+		const phonePattern = "{3}[-.]?{3}[-.]?{4}\b";
 		const errors = {
 			firstNameError: '',
 			lastNameError: '',
@@ -58,10 +81,15 @@ class MuiContactForm extends Component {
 
 		if (!this.state.email) {
 			isError = true;
+			errors.emailError = "Email is required"
+		}
+		
+		if (this.state.email != /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(this.state.email)) {
+			isError = true
 			errors.emailError = "Please enter a valid email address"
 		}
 
-		if (!this.state.phone === phonePattern) {
+		if (this.state.phone &&  !phonePattern) {
 			isError = true;
 			errors.phoneError = "Please enter a valid phone number"
 		}
@@ -100,13 +128,6 @@ class MuiContactForm extends Component {
 	};
 
 	render() {
-		const states = [
-			'AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FL', 'GA', 'HI',
-			'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS',
-			'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR',
-			'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY'
-		];
-
 		return (
 		<div
 			style={contentStyle}>
@@ -158,11 +179,12 @@ class MuiContactForm extends Component {
 				<SelectField
 					name="state"
 					floatingLabelText="State"
-					value={this.state.state}
+					value={this.state.stateName}
 					style={textFieldStyle}
-					onChange={e => this.handleInputChange(e)}
+					onChange={(e) => this.handleInputChange(e)}
 					maxHeight={200}>
-						{states.map(state => <option value='state' key={state}>{state}</option>)}
+						{stateNameList.map(stateName => <MenuItem key={stateName} onChange={(e) => this.onStateChange(stateName)} primaryText={stateName} />)}
+						{/* {this._renderStates()} */}
 				</SelectField>
 				<RaisedButton
 					label="Submit"
