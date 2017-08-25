@@ -17,7 +17,7 @@ const textFieldStyle = {
   flexDirection: 'column',
 };
 
-const stateNameList = [
+const statesList = [
 	'AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FL', 'GA', 'HI',
 	'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS',
 	'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR',
@@ -41,7 +41,7 @@ class MuiContactForm extends Component {
 
 
 		};
-		this.onStateChange = this.onStateChange.bind(this)
+		// this.onStateChange = this.onStateChange.bind(this)
 	}
 
 	// _renderStates() {
@@ -53,8 +53,7 @@ class MuiContactForm extends Component {
 	onStateChange = (e, updatedValue) => {
 		this.setState({
 			state: updatedValue
-		}, console.log(this.state.stateName))
-		this.props.updateStateState(updatedValue)
+		}, console.log(this.state.state));
 	};
 
 
@@ -62,12 +61,12 @@ class MuiContactForm extends Component {
 		this.props.onChange({ [e.target.name]: e.target.value });
 		this.setState({
 			[e.target.name]: e.target.value
-		}, console.log(e.target.name))
+		}, console.log(e.target.value))
 	};
 
 	validate = () => {
 		let isError = false;
-		const phonePattern = "{3}[-.]?{3}[-.]?{4}\b";
+		const phonePattern = this.state.phone.match(/^[(]{0,1}[0-9]{3}[)]{0,1}[-\s\.]{0,1}[0-9]{3}[-\s\.]{0,1}[0-9]{4}$/);
 		const errors = {
 			firstNameError: '',
 			lastNameError: '',
@@ -82,12 +81,15 @@ class MuiContactForm extends Component {
 		if (!this.state.email) {
 			isError = true;
 			errors.emailError = "Email is required"
-		}
-
-		if (this.state.email !== /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(this.state.email)) {
-			isError = true
+		} else if (!this.state.email === /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(this.state.email)) {
+			isError = true;
 			errors.emailError = "Please enter a valid email address"
 		}
+
+		// if (this.state.email !== /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(this.state.email)) {
+		// 	isError = true;
+		// 	errors.emailError = "Please enter a valid email address"
+		// }
 
 		if (this.state.phone && !phonePattern) {
 			isError = true;
@@ -179,11 +181,11 @@ class MuiContactForm extends Component {
 				<SelectField
 					name="state"
 					floatingLabelText="State"
-					value={this.state.stateName}
+					value={this.state.state}
 					style={textFieldStyle}
 					onChange={(e) => this.handleInputChange(e)}
 					maxHeight={200}>
-						{stateNameList.map(stateName => <MenuItem key={stateName} onChange={(e) => this.onStateChange(stateName)} primaryText={stateName} />)}
+						{statesList.map((state, i) => <MenuItem key={i} onChange={(e) => this.onStateChange()} primaryText={state} />)}
 						{/* {this._renderStates()} */}
 				</SelectField>
 				<RaisedButton
