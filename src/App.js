@@ -5,7 +5,7 @@ import Footer from './components/footer'
 import MuiContactForm from './components/Contact'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import {grey700, indigo900, pink300} from 'material-ui/styles/colors';
+import {grey900, indigo900, pink300} from 'material-ui/styles/colors';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
 
@@ -61,11 +61,11 @@ const muiTheme = getMuiTheme({
 	palette: {
 		primary1Color: indigo900,
 		accent1Color: pink300,
-		textColor: grey700,
+		textColor: grey900,
 
 	},
 	appBar: {
-		height: 150
+		height: 100
 	},
 	title: {
 		fontSize: 30

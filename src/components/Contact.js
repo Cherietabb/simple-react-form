@@ -9,7 +9,6 @@ const contentStyle = {
 	width: '80%',
 	padding: '50px',
 	justifyContent: 'center'
-	// margin: 'auto 0'
 };
 
 const textFieldStyle = {
@@ -17,7 +16,7 @@ const textFieldStyle = {
   flexDirection: 'column',
 };
 
-const statesList = [
+const states = [
 	'AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FL', 'GA', 'HI',
 	'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS',
 	'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR',
@@ -37,25 +36,16 @@ class MuiContactForm extends Component {
 			emailError: '',
 			phone: '',
 			phoneError: '',
-			state: '',
-
-
+			state: ''
 		};
-		// this.onStateChange = this.onStateChange.bind(this)
 	}
 
-	// _renderStates() {
-	// 	return this.state.stateNameList.map(stateName => {
-	// 		return <MenuItem key={stateName} />
-	// 	})
-	// }
-	//
-	onStateChange = (e, updatedValue) => {
+	onStateChange = (e) => {
 		this.setState({
-			state: updatedValue
-		}, console.log(this.state.state));
-	};
+			[e.target.name]: e.target.value
 
+		}, console.log(e.target.value))
+	};
 
 	handleInputChange = e => {
 		this.props.onChange({ [e.target.name]: e.target.value });
@@ -85,12 +75,6 @@ class MuiContactForm extends Component {
 			isError = true;
 			errors.emailError = "Please enter a valid email address"
 		}
-
-		// if (this.state.email !== /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(this.state.email)) {
-		// 	isError = true;
-		// 	errors.emailError = "Please enter a valid email address"
-		// }
-
 		if (this.state.phone && !phonePattern) {
 			isError = true;
 			errors.phoneError = "Please enter a valid phone number"
@@ -115,14 +99,12 @@ class MuiContactForm extends Component {
 				lastName: '',
 				email: '',
 				phone: '',
-				state: '',
 			});
 			this.props.onChange({
 				firstName: '',
 				lastName: '',
 				email: '',
 				phone: '',
-				state: ''
 			})
 		}
 
@@ -142,7 +124,6 @@ class MuiContactForm extends Component {
 					value={this.state.firstName}
 					onChange={e => this.handleInputChange(e)}
 					errorText={this.state.firstNameError}
-					// floatingLabelFixed
 				/>
 
 				<TextField
@@ -153,7 +134,6 @@ class MuiContactForm extends Component {
 					value={this.state.lastName}
 					onChange={e => this.handleInputChange(e)}
 					errorText={this.state.lastNameError}
-					// floatingLabelFixed
 				/>
 
 				<TextField
@@ -165,7 +145,6 @@ class MuiContactForm extends Component {
 					value={this.state.email}
 					onChange={e => this.handleInputChange(e)}
 					errorText={this.state.emailError}
-					// floatingLabelFixed
 				/>
 
 				<TextField
@@ -176,8 +155,8 @@ class MuiContactForm extends Component {
 					value={this.state.phone}
 					onChange={e => this.handleInputChange(e)}
 					errorText={this.state.phoneError}
-					// floatingLabelFixed
 				/>
+
 				<SelectField
 					name="state"
 					floatingLabelText="State"
