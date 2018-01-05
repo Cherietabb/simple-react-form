@@ -38,7 +38,6 @@ class App extends Component {
 							<p>
 								{JSON.stringify(this.state.fields, null, 2)}
 							</p>
-							{/*<ContactUs />*/}
 						</div>
 					</div>
 					<div>

@@ -16,8 +16,8 @@ const textFieldStyle = {
   flexDirection: 'column',
 };
 
-const states = [
-	'AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FL', 'GA', 'HI',
+const statesList = [
+	'AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FL', 'GA', 'HI',
 	'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS',
 	'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR',
 	'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY'
@@ -36,14 +36,15 @@ class MuiContactForm extends Component {
 			emailError: '',
 			phone: '',
 			phoneError: '',
-			state: ''
+			state: {selected: ''}
 		};
 	}
 
 	onStateChange = (e) => {
-		this.setState({
-			[e.target.name]: e.target.value
 
+		this.setState({
+			[e.target.name]: e.target.value,
+			selected: e.target.value
 		}, console.log(e.target.value))
 	};
 
@@ -99,12 +100,14 @@ class MuiContactForm extends Component {
 				lastName: '',
 				email: '',
 				phone: '',
+				state: ''
 			});
 			this.props.onChange({
 				firstName: '',
 				lastName: '',
 				email: '',
 				phone: '',
+				state: ''
 			})
 		}
 
@@ -160,13 +163,11 @@ class MuiContactForm extends Component {
 				<SelectField
 					name="state"
 					floatingLabelText="State"
-					value={this.state.state}
 					style={textFieldStyle}
-					onChange={(e) => this.handleInputChange(e)}
 					maxHeight={200}>
-						{statesList.map((state, i) => <MenuItem key={i} onChange={(e) => this.onStateChange()} primaryText={state} />)}
-						{/* {this._renderStates()} */}
+						{statesList.map((state, index) => <MenuItem key={index} value={this.state.state} onChange={(e) => this.onStateChange()} primaryText={state} />)}
 				</SelectField>
+
 				<RaisedButton
 					label="Submit"
 					primary={true}

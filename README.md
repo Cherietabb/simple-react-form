@@ -1,5 +1,5 @@
 # Simple React Contact Form
-I created this repo to teach myself how to build and validate forms using React.
+Simple form with validation.
 
 
 ## Used to create app:
@@ -10,9 +10,11 @@ Node.js v6.11.0 or later<br>
 ### Getting Started
 Clone or fork this repo and run `yarn install`
 
-### `npm start` 
-Runs the app in development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### `yarn start` 
+Runs the app in development mode.
+
+
+Automatically opens to [http://localhost:3000](http://localhost:3000) for viewing in the browser.
 
 
 
