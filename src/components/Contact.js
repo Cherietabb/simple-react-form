@@ -36,15 +36,13 @@ class MuiContactForm extends Component {
 			emailError: '',
 			phone: '',
 			phoneError: '',
-			state: {selected: ''}
+			stateName: {value: []}
 		};
 	}
 
-	onStateChange = (e) => {
-
+	onStateChange = field => (e, key, value) => {
 		this.setState({
-			[e.target.name]: e.target.value,
-			selected: e.target.value
+			value
 		}, console.log(e.target.value))
 	};
 
@@ -54,6 +52,16 @@ class MuiContactForm extends Component {
 			[e.target.name]: e.target.value
 		}, console.log(e.target.value))
 	};
+
+	menuItems() {
+		return statesList.map((stateName, i) => (
+			<MenuItem
+				key={i}
+			  value={stateName}
+			  primaryText={stateName}
+			/>
+		))
+	}
 
 	validate = () => {
 		let isError = false;
@@ -100,14 +108,14 @@ class MuiContactForm extends Component {
 				lastName: '',
 				email: '',
 				phone: '',
-				state: ''
+				stateName: ''
 			});
 			this.props.onChange({
 				firstName: '',
 				lastName: '',
 				email: '',
 				phone: '',
-				state: ''
+				stateName: ''
 			})
 		}
 
@@ -161,11 +169,15 @@ class MuiContactForm extends Component {
 				/>
 
 				<SelectField
-					name="state"
+					name="stateName"
+					multiple={false}
 					floatingLabelText="State"
 					style={textFieldStyle}
+					value={this.state.value}
+					onChange={this.onStateChange()}
 					maxHeight={200}>
-						{statesList.map((state, index) => <MenuItem key={index} value={this.state.state} onChange={(e) => this.onStateChange()} primaryText={state} />)}
+					{this.menuItems()}
+						{/*{statesList.map((stateName, index) => <MenuItem key={index} value={1}  onChange={(e) => this.onStateChange()} primaryText={stateName} />)}*/}
 				</SelectField>
 
 				<RaisedButton
