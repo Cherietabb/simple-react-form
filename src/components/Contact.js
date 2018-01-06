@@ -47,7 +47,6 @@ class MuiContactForm extends Component {
 	};
 
 	handleInputChange = e => {
-		this.props.onChange({ [e.target.name]: e.target.value });
 		this.setState({
 			[e.target.name]: e.target.value
 		}, console.log(e.target.value))
@@ -101,7 +100,6 @@ class MuiContactForm extends Component {
 		e.preventDefault();
 		const err = this.validate();
 		if (!err) {
-			console.log(this.state);
 			//clear form
 			this.setState({
 				firstName: '',
@@ -119,7 +117,6 @@ class MuiContactForm extends Component {
 			})
 		}
 
-		// this.props.handleSubmit(this.state);
 	};
 
 	render() {
@@ -177,7 +174,6 @@ class MuiContactForm extends Component {
 					onChange={this.onStateChange()}
 					maxHeight={200}>
 					{this.menuItems()}
-						{/*{statesList.map((stateName, index) => <MenuItem key={index} value={1}  onChange={(e) => this.onStateChange()} primaryText={stateName} />)}*/}
 				</SelectField>
 
 				<RaisedButton

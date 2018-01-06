@@ -10,19 +10,6 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
 
 class App extends Component {
-	state = {
-		fields: {}
-	};
-
-	onChange = updatedValue => {
-		this.setState({
-			fields: {
-				...this.state.fields,
-				...updatedValue
-			}
-		})
-	};
-
 	render() {
 		return (
 			<MuiThemeProvider muiTheme={muiTheme}>
@@ -33,10 +20,9 @@ class App extends Component {
 					</div>
 					<div>
 						<div>
-							<MuiContactForm onChange={fields => this.onChange(fields)} />
+							<MuiContactForm />
 							<br />
 							<p>
-								{JSON.stringify(this.state.fields, null, 2)}
 							</p>
 						</div>
 					</div>
