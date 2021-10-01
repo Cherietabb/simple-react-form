@@ -6,8 +6,6 @@ import MuiContactForm from './components/Contact'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import {grey900, indigo900, pink300} from 'material-ui/styles/colors';
-import injectTapEventPlugin from 'react-tap-event-plugin';
-injectTapEventPlugin();
 
 class App extends Component {
 	render() {
