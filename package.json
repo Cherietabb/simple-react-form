@@ -3,21 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-<<<<<<< HEAD
-    "material-ui": "0.18.7",
-    "react": "^15.6.1",
-    "react-dom": "^15.6.1",
-    "react-router-dom": "^4.1.2",
-    "react-scripts": "1.0.10",
-    "react-tap-event-plugin": "^2.0.1"
-=======
     "material-ui": "^0.20.2",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-router-dom": "^5.0.1",
     "react-scripts": "^3.0.1",
     "react-tap-event-plugin": "^3.0.3"
->>>>>>> 783edd9bcb1b7e1d9d9ba693f8f5225dd73c6fdd
   },
   "scripts": {
     "start": "react-scripts start",
